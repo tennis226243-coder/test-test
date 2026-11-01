@@ -11,6 +11,7 @@ export function createInitialState() {
     eventStage: { hina: 0, rei: 0, shiori: 0 },
     flags: {},
     talkedToday: {},
+    inventory: {},
     ended: null,
   };
 }
