@@ -1,0 +1,7 @@
+Photorealistic portrait photograph of an original fictional character (not resembling any real person or celebrity).
+Subject: an adult woman, age {age}. {appearance}.
+Personality to convey: {personality}
+Framing: knee-up shot, standing, body facing the camera slightly angled, looking at the viewer, natural relaxed pose, arms relaxed.
+Style: realistic visual-novel character sprite, soft studio lighting, sharp focus, natural skin texture, tasteful and modest, fully clothed, all-ages appropriate.
+Background: perfectly flat solid chroma-key green (#00FF00) with no shadows, no gradient, no props. Leave a margin around the figure.
+Expression: {expression}.

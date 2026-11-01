@@ -1,0 +1,3 @@
+Using the attached image as the exact reference, generate the same adult woman (age {age}) with the identical face, hair, outfit, pose, framing, lighting and the same flat chroma-key green (#00FF00) background.
+Change ONLY her facial expression to: {expression}.
+Keep it photorealistic, tasteful and all-ages appropriate.
