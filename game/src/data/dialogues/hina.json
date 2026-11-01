@@ -1,0 +1,155 @@
+[
+  {
+    "id": "hina_talk_1", "heroine": "hina", "type": "talk",
+    "lines": [
+      { "speaker": "hina", "expression": "smile", "text": "おはよー! 今日の一限、眠すぎない?" },
+      { "choice": [
+        { "text": "正直、半分寝てた", "effects": { "affection": { "hina": 2 } }, "next": "a" },
+        { "text": "ちゃんとノート取ったよ", "effects": { "affection": { "hina": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "だよねー! 仲間がいて安心した〜" } ],
+      "b": [ { "speaker": "hina", "expression": "surprised", "text": "えっ、えらい! あとで見せてくれる……?" } ]
+    }
+  },
+  {
+    "id": "hina_talk_2", "heroine": "hina", "type": "talk",
+    "lines": [
+      { "speaker": "hina", "expression": "normal", "text": "商店街に新しいクレープ屋さんできたの知ってる?" },
+      { "choice": [
+        { "text": "今度一緒に行こうよ", "effects": { "affection": { "hina": 3 } }, "next": "a" },
+        { "text": "甘いものはちょっと……", "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "shy", "text": "ほんと!? ……約束だからね!" } ],
+      "b": [ { "speaker": "hina", "expression": "sad", "text": "えー、もったいない! 人生の半分損してるよ!" } ]
+    }
+  },
+  {
+    "id": "hina_talk_3", "heroine": "hina", "type": "talk",
+    "lines": [
+      { "speaker": "hina", "expression": "normal", "text": "ねえ、休みの日って何してるの?" },
+      { "choice": [
+        { "text": "海辺を走ってる", "effects": { "affection": { "hina": 2 } }, "next": "a" },
+        { "text": "家でゴロゴロしてる", "effects": { "affection": { "hina": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "surprised", "text": "健康的! 土曜の夕方、私も海のほう散歩してるんだ" } ],
+      "b": [ { "speaker": "hina", "expression": "smile", "text": "わかる〜。でもたまには外に出よ? 誘っちゃうからね" } ]
+    }
+  },
+  {
+    "id": "hina_talk_4", "heroine": "hina", "type": "talk",
+    "lines": [
+      { "speaker": "hina", "expression": "smile", "text": "レポートの締め切り、来週だって! 一緒に図書館行かない?" },
+      { "choice": [
+        { "text": "いいね、教え合おう", "effects": { "affection": { "hina": 2 }, "stats": { "int": 1 } }, "next": "a" },
+        { "text": "一人で集中したいかな", "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "やった! 心強い〜" } ],
+      "b": [ { "speaker": "hina", "expression": "normal", "text": "そっか。じゃあ終わったらお茶しよ!" } ]
+    }
+  },
+  {
+    "id": "hina_event_1", "heroine": "hina", "type": "event", "event": 1, "location": "campus",
+    "lines": [
+      { "speaker": "narration", "text": "講義が終わると、ひなが小走りで駆け寄ってきた。" },
+      { "speaker": "hina", "expression": "smile", "text": "ねえねえ、このあと空いてる? 学食の新メニュー、一人じゃ勇気出なくて!" },
+      { "choice": [
+        { "text": "付き合うよ", "effects": { "affection": { "hina": 5 } }, "next": "a" },
+        { "text": "どんなメニュー?", "effects": { "affection": { "hina": 3 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [
+        { "speaker": "hina", "expression": "smile", "text": "やった! 持つべきものは同級生だね!" },
+        { "speaker": "narration", "text": "激辛カレーに二人で涙を流しながら、たくさん笑った。" }
+      ],
+      "b": [
+        { "speaker": "hina", "expression": "surprised", "text": "「激辛地獄カレー」! ……やっぱやめとく?" },
+        { "speaker": "me", "text": "いや、行こう。" },
+        { "speaker": "hina", "expression": "smile", "text": "そうこなくっちゃ!" }
+      ]
+    }
+  },
+  {
+    "id": "hina_event_2", "heroine": "hina", "type": "event", "event": 2, "location": "shopping",
+    "lines": [
+      { "speaker": "narration", "text": "夕方の商店街。ひながアクセサリー屋の前で立ち止まっている。" },
+      { "speaker": "hina", "expression": "shy", "text": "あ、見られちゃった。このヘアピン、かわいいなーって思って。" },
+      { "choice": [
+        { "text": "似合いそう", "effects": { "affection": { "hina": 5 } }, "next": "a" },
+        { "text": "今のヘアピンも好きだけどな", "effects": { "affection": { "hina": 6 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "ほんと? ……じゃあ、今度のバイト代で買っちゃおうかな" } ],
+      "b": [
+        { "speaker": "hina", "expression": "surprised", "text": "えっ" },
+        { "speaker": "hina", "expression": "shy", "text": "これ、高校のときからずっと使ってるやつなんだ。……気づいてくれたの、初めてかも" }
+      ]
+    }
+  },
+  {
+    "id": "hina_event_3", "heroine": "hina", "type": "event", "event": 3, "location": "seaside",
+    "lines": [
+      { "speaker": "narration", "text": "土曜の夕暮れ。海辺の公園で、ひなが一人で海を見ていた。" },
+      { "speaker": "hina", "expression": "sad", "text": "……実はね、ちょっと迷ってるんだ。留学の話、来てて。" },
+      { "speaker": "hina", "expression": "normal", "text": "行きたい気持ちもあるけど、ここの毎日も好きだから。" },
+      { "choice": [
+        { "text": "ひなならどこでもやっていけるよ", "effects": { "affection": { "hina": 6 } }, "next": "a" },
+        { "text": "いなくなったら寂しいな", "effects": { "affection": { "hina": 6 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "……ありがと。そう言ってもらえると、背中押される気がする" } ],
+      "b": [ { "speaker": "hina", "expression": "shy", "text": "……ずるいなあ、そういうこと言うの" } ]
+    }
+  },
+  {
+    "id": "hina_event_4", "heroine": "hina", "type": "event", "event": 4, "location": "campus",
+    "lines": [
+      { "speaker": "hina", "expression": "smile", "text": "決めた! 留学は、卒業してから行く!" },
+      { "speaker": "hina", "expression": "normal", "text": "今しかできないこと、ここでちゃんとやりたいなって思ったんだ。" },
+      { "speaker": "hina", "expression": "shy", "text": "……その「今しかできないこと」に、キミも入ってるんだけど。" },
+      { "choice": [
+        { "text": "それって……?", "effects": { "affection": { "hina": 5 } }, "next": "a" },
+        { "text": "光栄です", "effects": { "affection": { "hina": 4 } }, "next": "a" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "ふふ、まだ内緒! 続きは夏祭りまでに考えといて!" } ]
+    }
+  },
+  {
+    "id": "hina_event_5", "heroine": "hina", "type": "event", "event": 5, "location": "shopping",
+    "lines": [
+      { "speaker": "hina", "expression": "shy", "text": "あのさ。7月31日の夏祭り、もう誰かと約束してる?" },
+      { "choice": [
+        { "text": "ひなと行きたい", "effects": { "affection": { "hina": 6 }, "setFlag": "hina_festival" }, "next": "a" },
+        { "text": "まだ決めてない", "effects": { "affection": { "hina": 2 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "hina", "expression": "smile", "text": "……っ! うん! 浴衣、気合い入れて着ていくからね!" } ],
+      "b": [ { "speaker": "hina", "expression": "normal", "text": "そっか。じゃあ……神社で待ってる。来てくれたら、うれしいな" } ]
+    }
+  },
+  {
+    "id": "hina_ending", "heroine": "hina", "type": "ending", "location": "shrine",
+    "lines": [
+      { "speaker": "narration", "text": "夏祭りの夜。石段の上で、浴衣姿のひなが手を振っていた。" },
+      { "speaker": "hina", "expression": "smile", "text": "来てくれた! 遅いよー、りんご飴もう食べちゃった!" },
+      { "speaker": "narration", "text": "夜空に、最初の花火が咲く。" },
+      { "speaker": "hina", "expression": "shy", "text": "……あのね。私、キミのことが好き。4月からずっと、毎日が楽しかったのはキミのおかげ。" },
+      { "speaker": "me", "text": "俺も、ひなのことが好きだよ。" },
+      { "speaker": "hina", "expression": "smile", "text": "……へへ。じゃあ、来年もその次も、一緒に花火見ようね!" },
+      { "speaker": "narration", "text": "── ひなエンド「夏色のスタートライン」" }
+    ]
+  }
+]

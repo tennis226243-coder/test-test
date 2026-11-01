@@ -1,0 +1,147 @@
+[
+  {
+    "id": "shiori_talk_1", "heroine": "shiori", "type": "talk",
+    "lines": [
+      { "speaker": "shiori", "expression": "normal", "text": "……返却期限、明日までです。忘れないでくださいね。" },
+      { "choice": [
+        { "text": "ありがとうございます", "effects": { "affection": { "shiori": 1 } }, "next": "a" },
+        { "text": "面白かったので延長したいです", "effects": { "affection": { "shiori": 3 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "smile", "text": "いえ。……どういたしまして" } ],
+      "b": [ { "speaker": "shiori", "expression": "surprised", "text": "……! その作家、続編もあるんです。よかったら……" } ]
+    }
+  },
+  {
+    "id": "shiori_talk_2", "heroine": "shiori", "type": "talk",
+    "lines": [
+      { "speaker": "shiori", "expression": "normal", "text": "……おすすめの本、ですか?" },
+      { "choice": [
+        { "text": "月島さんの一番好きな本を", "effects": { "affection": { "shiori": 3 } }, "next": "a" },
+        { "text": "読みやすいのがいいです", "effects": { "affection": { "shiori": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "shy", "text": "そ、それは……少し恥ずかしいですけど。これ、です" } ],
+      "b": [ { "speaker": "shiori", "expression": "smile", "text": "では、短編集はいかがでしょう。電車の中でも読めます" } ]
+    }
+  },
+  {
+    "id": "shiori_talk_3", "heroine": "shiori", "type": "talk",
+    "lines": [
+      { "speaker": "shiori", "expression": "normal", "text": "この神社、静かで好きなんです。……あなたも?" },
+      { "choice": [
+        { "text": "落ち着きますよね", "effects": { "affection": { "shiori": 2 } }, "next": "a" },
+        { "text": "月島さんがいるかなと思って", "effects": { "affection": { "shiori": 3 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "smile", "text": "はい。ここで読む本は、なぜか特別な味がします" } ],
+      "b": [ { "speaker": "shiori", "expression": "shy", "text": "……っ。そ、そうですか……" } ]
+    }
+  },
+  {
+    "id": "shiori_talk_4", "heroine": "shiori", "type": "talk",
+    "lines": [
+      { "speaker": "shiori", "expression": "normal", "text": "勉強、はかどっていますか?" },
+      { "choice": [
+        { "text": "おかげさまで", "effects": { "affection": { "shiori": 2 }, "stats": { "int": 1 } }, "next": "a" },
+        { "text": "全然です……", "effects": { "affection": { "shiori": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "smile", "text": "それはよかったです。窓際の席、空いてますよ" } ],
+      "b": [ { "speaker": "shiori", "expression": "normal", "text": "参考になりそうな本、探しておきますね" } ]
+    }
+  },
+  {
+    "id": "shiori_event_1", "heroine": "shiori", "type": "event", "event": 1, "location": "library",
+    "lines": [
+      { "speaker": "narration", "text": "高い棚の前で、栞さんが脚立に乗って本に手を伸ばしている。" },
+      { "speaker": "shiori", "expression": "surprised", "text": "わ、わっ……!" },
+      { "choice": [
+        { "text": "脚立を支える", "effects": { "affection": { "shiori": 5 } }, "next": "a" },
+        { "text": "代わりに取りますよ", "effects": { "affection": { "shiori": 4 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "shy", "text": "あ、ありがとうございます……助かりました" } ],
+      "b": [ { "speaker": "shiori", "expression": "smile", "text": "……背が高いと、便利ですね。少し、うらやましいです" } ]
+    }
+  },
+  {
+    "id": "shiori_event_2", "heroine": "shiori", "type": "event", "event": 2, "location": "shrine",
+    "lines": [
+      { "speaker": "narration", "text": "日曜の朝の神社。栞さんがベンチで文庫本を開いていた。" },
+      { "speaker": "shiori", "expression": "normal", "text": "……実は、小説を書いているんです。誰にも言ったことないんですけど。" },
+      { "choice": [
+        { "text": "読んでみたいです", "effects": { "affection": { "shiori": 6 } }, "next": "a" },
+        { "text": "どんな話ですか?", "effects": { "affection": { "shiori": 5 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "shy", "text": "ま、まだ全然ダメなので……完成したら、一番に" } ],
+      "b": [ { "speaker": "shiori", "expression": "smile", "text": "海辺の町の、小さな図書館のお話です。……ふふ、そのまんまですね" } ]
+    }
+  },
+  {
+    "id": "shiori_event_3", "heroine": "shiori", "type": "event", "event": 3, "location": "library",
+    "condition": { "stats": { "int": 25 } },
+    "lines": [
+      { "speaker": "shiori", "expression": "normal", "text": "この前の古典の資料、全部読んだんですか? ……すごいです。" },
+      { "speaker": "shiori", "expression": "smile", "text": "あなたと本の話をしていると、時間を忘れてしまいます。" },
+      { "choice": [
+        { "text": "俺もです", "effects": { "affection": { "shiori": 6 } }, "next": "a" },
+        { "text": "閉館後も話しませんか", "effects": { "affection": { "shiori": 7 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "shy", "text": "……よかった。私だけじゃなかったんですね" } ],
+      "b": [ { "speaker": "shiori", "expression": "surprised", "text": "え……あ、はい。少しだけ、なら" } ]
+    }
+  },
+  {
+    "id": "shiori_event_4", "heroine": "shiori", "type": "event", "event": 4, "location": "shrine",
+    "lines": [
+      { "speaker": "shiori", "expression": "shy", "text": "小説、書き上がりました。……読んで、もらえますか?" },
+      { "speaker": "narration", "text": "物語の主人公は、図書館で出会った青年に少しずつ心を開いていく司書だった。" },
+      { "choice": [
+        { "text": "この主人公って……", "effects": { "affection": { "shiori": 6 } }, "next": "a" },
+        { "text": "すごくよかったです", "effects": { "affection": { "shiori": 5 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "shy", "text": "……き、気づかなくていいところに気づかないでください……" } ],
+      "b": [ { "speaker": "shiori", "expression": "smile", "text": "……ほんとうに? よかった……" } ]
+    }
+  },
+  {
+    "id": "shiori_event_5", "heroine": "shiori", "type": "event", "event": 5, "location": "library",
+    "lines": [
+      { "speaker": "shiori", "expression": "shy", "text": "あの……物語の結末、まだ決めていないんです。" },
+      { "speaker": "shiori", "expression": "normal", "text": "31日の夏祭りで、決められたらいいなと思っていて。……一緒に、来てくれますか?" },
+      { "choice": [
+        { "text": "もちろんです", "effects": { "affection": { "shiori": 6 }, "setFlag": "shiori_festival" }, "next": "a" },
+        { "text": "結末、楽しみにしてます", "effects": { "affection": { "shiori": 4 }, "setFlag": "shiori_festival" }, "next": "a" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "shiori", "expression": "smile", "text": "……はい。待っています" } ]
+    }
+  },
+  {
+    "id": "shiori_ending", "heroine": "shiori", "type": "ending", "location": "shrine",
+    "lines": [
+      { "speaker": "narration", "text": "いつもの神社が、今夜は提灯の灯りで満ちている。" },
+      { "speaker": "shiori", "expression": "shy", "text": "……浴衣なんて、何年ぶりでしょう。変じゃないですか?" },
+      { "speaker": "me", "text": "すごく似合ってます。" },
+      { "speaker": "narration", "text": "花火の音が、二人の沈黙をやさしく埋めていく。" },
+      { "speaker": "shiori", "expression": "normal", "text": "物語の結末、決めました。司書は、青年に想いを伝えるんです。" },
+      { "speaker": "shiori", "expression": "shy", "text": "……あなたが、好きです。" },
+      { "speaker": "me", "text": "俺も、栞さんが好きです。" },
+      { "speaker": "shiori", "expression": "smile", "text": "……よかった。これで、この物語はハッピーエンドです。" },
+      { "speaker": "narration", "text": "── 栞エンド「しおりを挟んだ夏」" }
+    ]
+  }
+]

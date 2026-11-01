@@ -1,0 +1,151 @@
+[
+  {
+    "id": "rei_talk_1", "heroine": "rei", "type": "talk",
+    "lines": [
+      { "speaker": "rei", "expression": "normal", "text": "お疲れさま。今日はシフト入ってないでしょ? お客さんとして来たの?" },
+      { "choice": [
+        { "text": "玲さんのコーヒーが飲みたくて", "effects": { "affection": { "rei": 3 } }, "next": "a" },
+        { "text": "近くを通ったので", "effects": { "affection": { "rei": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "……口がうまいのね。じゃあ、とびきり丁寧に淹れてあげる" } ],
+      "b": [ { "speaker": "rei", "expression": "normal", "text": "そう。ゆっくりしていって" } ]
+    }
+  },
+  {
+    "id": "rei_talk_2", "heroine": "rei", "type": "talk",
+    "lines": [
+      { "speaker": "rei", "expression": "normal", "text": "ラテアート、練習してるの。これ、何に見える?" },
+      { "choice": [
+        { "text": "ハート", "effects": { "affection": { "rei": 1 } }, "next": "a" },
+        { "text": "……猫?", "effects": { "affection": { "rei": 3 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "sad", "text": "……猫のつもりだったんだけど" } ],
+      "b": [ { "speaker": "rei", "expression": "surprised", "text": "わかってくれた! ……ちょっと嬉しい" } ]
+    }
+  },
+  {
+    "id": "rei_talk_3", "heroine": "rei", "type": "talk",
+    "lines": [
+      { "speaker": "rei", "expression": "normal", "text": "大学はどう? 無理してない?" },
+      { "choice": [
+        { "text": "楽しいです", "effects": { "affection": { "rei": 2 } }, "next": "a" },
+        { "text": "実はちょっと疲れ気味で", "effects": { "affection": { "rei": 2 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "ならいいの。楽しめるうちに楽しみなさい" } ],
+      "b": [ { "speaker": "rei", "expression": "normal", "text": "正直でよろしい。今日は早く寝ること。先輩命令よ" } ]
+    }
+  },
+  {
+    "id": "rei_talk_4", "heroine": "rei", "type": "talk",
+    "lines": [
+      { "speaker": "rei", "expression": "smile", "text": "夜の海って、昼間とは別の顔をしてると思わない?" },
+      { "choice": [
+        { "text": "静かで落ち着きますね", "effects": { "affection": { "rei": 2 } }, "next": "a" },
+        { "text": "ちょっと怖いかも", "effects": { "affection": { "rei": 1 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "でしょ。ここ、私のお気に入りの場所なの" } ],
+      "b": [ { "speaker": "rei", "expression": "smile", "text": "ふふ。じゃあ、怖くないように隣にいてあげる" } ]
+    }
+  },
+  {
+    "id": "rei_event_1", "heroine": "rei", "type": "event", "event": 1, "location": "cafe",
+    "lines": [
+      { "speaker": "narration", "text": "閉店間際のカフェ。玲さんがカウンターで一人、帳簿をつけている。" },
+      { "speaker": "rei", "expression": "normal", "text": "ちょうどよかった。新作の試作、味見してくれない?" },
+      { "choice": [
+        { "text": "喜んで", "effects": { "affection": { "rei": 5 } }, "next": "a" },
+        { "text": "正直に言っていいなら", "effects": { "affection": { "rei": 4 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "ありがと。……どう? 苦すぎない?" } ],
+      "b": [ { "speaker": "rei", "expression": "smile", "text": "もちろん。お世辞はいらないわ。そういうところ、信用してるから" } ]
+    }
+  },
+  {
+    "id": "rei_event_2", "heroine": "rei", "type": "event", "event": 2, "location": "seaside",
+    "lines": [
+      { "speaker": "narration", "text": "夜の海辺。ベンチに座る玲さんを見つけた。" },
+      { "speaker": "rei", "expression": "surprised", "text": "……あら。こんな時間にどうしたの" },
+      { "speaker": "rei", "expression": "normal", "text": "私ね、いつか自分のお店を持ちたいの。海の見える、小さなカフェ。" },
+      { "choice": [
+        { "text": "絶対に行きます", "effects": { "affection": { "rei": 5 } }, "next": "a" },
+        { "text": "手伝わせてください", "effects": { "affection": { "rei": 6 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "常連第一号ね。覚えておくわ" } ],
+      "b": [ { "speaker": "rei", "expression": "shy", "text": "……本気にするわよ? そういうこと言うと" } ]
+    }
+  },
+  {
+    "id": "rei_event_3", "heroine": "rei", "type": "event", "event": 3, "location": "cafe",
+    "lines": [
+      { "speaker": "narration", "text": "雨の日のカフェ。玲さんの表情が、いつもより暗い。" },
+      { "speaker": "rei", "expression": "sad", "text": "……コンテスト、落ちちゃった。自信あったんだけどな。" },
+      { "choice": [
+        { "text": "玲さんのコーヒーが一番です", "effects": { "affection": { "rei": 6 } }, "next": "a" },
+        { "text": "今日は俺が淹れます", "effects": { "affection": { "rei": 7 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "……ありがと。単純だけど、ちょっと元気出た" } ],
+      "b": [
+        { "speaker": "rei", "expression": "surprised", "text": "あなたが?" },
+        { "speaker": "narration", "text": "教わった通りに淹れたコーヒーは、少し薄かった。" },
+        { "speaker": "rei", "expression": "smile", "text": "……ふふ、まだまだね。でも、今まで飲んだ中で一番あたたかい味がする" }
+      ]
+    }
+  },
+  {
+    "id": "rei_event_4", "heroine": "rei", "type": "event", "event": 4, "location": "seaside",
+    "lines": [
+      { "speaker": "rei", "expression": "normal", "text": "来年の春、ここを辞めて修行に出ることにしたの。東京のお店で。" },
+      { "speaker": "rei", "expression": "sad", "text": "……あなたには、一番に言いたかった。" },
+      { "choice": [
+        { "text": "応援します", "effects": { "affection": { "rei": 5 } }, "next": "a" },
+        { "text": "それまで、もっと一緒にいたいです", "effects": { "affection": { "rei": 6 } }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "ありがとう。あなたに言われると、本当にできる気がする" } ],
+      "b": [ { "speaker": "rei", "expression": "shy", "text": "……私も。そう言ってほしかったのかもしれない" } ]
+    }
+  },
+  {
+    "id": "rei_event_5", "heroine": "rei", "type": "event", "event": 5, "location": "cafe",
+    "lines": [
+      { "speaker": "rei", "expression": "shy", "text": "31日、お店は早仕舞いなの。……夏祭り、一緒に行かない?" },
+      { "choice": [
+        { "text": "はい、ぜひ", "effects": { "affection": { "rei": 6 }, "setFlag": "rei_festival" }, "next": "a" },
+        { "text": "玲さんから誘ってくれるなんて", "effects": { "affection": { "rei": 4 }, "setFlag": "rei_festival" }, "next": "b" }
+      ] }
+    ],
+    "branches": {
+      "a": [ { "speaker": "rei", "expression": "smile", "text": "よかった。神社の鳥居の前で待ってるわね" } ],
+      "b": [ { "speaker": "rei", "expression": "shy", "text": "……たまには、先輩にも勇気を出させて" } ]
+    }
+  },
+  {
+    "id": "rei_ending", "heroine": "rei", "type": "ending", "location": "shrine",
+    "lines": [
+      { "speaker": "narration", "text": "鳥居の前。紺色の浴衣の玲さんが、少し照れくさそうに立っていた。" },
+      { "speaker": "rei", "expression": "shy", "text": "……何よ。浴衣、似合わない?" },
+      { "speaker": "me", "text": "すごく綺麗です。" },
+      { "speaker": "rei", "expression": "smile", "text": "素直でよろしい。" },
+      { "speaker": "narration", "text": "花火が上がる。玲さんがそっと手を重ねてきた。" },
+      { "speaker": "rei", "expression": "normal", "text": "春になったら私は行くけど……いつか海の見えるお店を開いたら、隣にいてくれる?" },
+      { "speaker": "me", "text": "約束します。" },
+      { "speaker": "rei", "expression": "smile", "text": "……好きよ。ずっと前から。" },
+      { "speaker": "narration", "text": "── 玲エンド「潮騒のブレンド」" }
+    ]
+  }
+]

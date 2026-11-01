@@ -1,0 +1,232 @@
+[
+  {
+    "id": "campus",
+    "name": "大学キャンパス",
+    "rect": {
+      "x": 4,
+      "y": 2,
+      "w": 14,
+      "h": 9
+    },
+    "door": {
+      "x": 11,
+      "y": 11
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "class",
+        "label": "授業を受ける",
+        "effects": {
+          "stats": {
+            "int": 3
+          }
+        },
+        "condition": {
+          "dayType": [
+            "weekday"
+          ],
+          "time": [
+            "morning",
+            "noon"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "library",
+    "name": "図書館",
+    "rect": {
+      "x": 20,
+      "y": 4,
+      "w": 7,
+      "h": 6
+    },
+    "door": {
+      "x": 23,
+      "y": 10
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "study",
+        "label": "自習する",
+        "effects": {
+          "stats": {
+            "int": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "shopping",
+    "name": "駅前商店街",
+    "rect": {
+      "x": 33,
+      "y": 4,
+      "w": 12,
+      "h": 6
+    },
+    "door": {
+      "x": 39,
+      "y": 10
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "buy_flowers",
+        "label": "花束を買う (1500円)",
+        "item": "flowers",
+        "cost": 1500
+      },
+      {
+        "id": "buy_book",
+        "label": "本を買う (1200円)",
+        "item": "book",
+        "cost": 1200
+      },
+      {
+        "id": "buy_accessory",
+        "label": "アクセサリーを買う (3000円)",
+        "item": "accessory",
+        "cost": 3000
+      },
+      {
+        "id": "buy_sweets",
+        "label": "スイーツを買う (800円)",
+        "item": "sweets",
+        "cost": 800
+      }
+    ]
+  },
+  {
+    "id": "station",
+    "name": "駅",
+    "rect": {
+      "x": 48,
+      "y": 3,
+      "w": 9,
+      "h": 7
+    },
+    "door": {
+      "x": 52,
+      "y": 10
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "look",
+        "label": "時刻表を眺める",
+        "effects": {}
+      }
+    ]
+  },
+  {
+    "id": "home",
+    "name": "自宅",
+    "rect": {
+      "x": 4,
+      "y": 19,
+      "w": 6,
+      "h": 5
+    },
+    "door": {
+      "x": 7,
+      "y": 24
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "rest",
+        "label": "休む (翌朝へ)",
+        "sleep": true
+      },
+      {
+        "id": "save",
+        "label": "セーブする",
+        "save": true
+      }
+    ]
+  },
+  {
+    "id": "shrine",
+    "name": "神社",
+    "rect": {
+      "x": 13,
+      "y": 18,
+      "w": 8,
+      "h": 6
+    },
+    "door": {
+      "x": 17,
+      "y": 24
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "pray",
+        "label": "お参りする",
+        "effects": {
+          "stats": {
+            "charm": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "cafe",
+    "name": "カフェ",
+    "rect": {
+      "x": 34,
+      "y": 19,
+      "w": 7,
+      "h": 5
+    },
+    "door": {
+      "x": 37,
+      "y": 24
+    },
+    "building": true,
+    "actions": [
+      {
+        "id": "work",
+        "label": "バイトする (+2000円)",
+        "effects": {
+          "money": 2000,
+          "stats": {
+            "stamina": -2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "seaside",
+    "name": "海辺の公園",
+    "rect": {
+      "x": 32,
+      "y": 29,
+      "w": 20,
+      "h": 3
+    },
+    "door": {
+      "x": 42,
+      "y": 28
+    },
+    "building": false,
+    "actions": [
+      {
+        "id": "run",
+        "label": "ランニングする",
+        "effects": {
+          "stats": {
+            "stamina": 3
+          }
+        }
+      }
+    ]
+  }
+]

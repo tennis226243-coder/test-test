@@ -1,0 +1,21 @@
+[
+  {
+    "id": "prologue", "heroine": null, "type": "prologue", "location": "home",
+    "lines": [
+      { "speaker": "narration", "text": "4月1日。海辺の小さな街で、一人暮らしが始まった。" },
+      { "speaker": "narration", "text": "大学、バイト、そして新しい出会い。7月31日の夏祭りまで、この街での毎日をどう過ごすかは自分次第だ。" },
+      { "speaker": "narration", "text": "【操作】矢印キー/WASDで移動、Space/Enterで話す・調べる。スマホは画面左下のパッドと右下のボタン。" },
+      { "speaker": "narration", "text": "建物の入口で行動すると時間が進む。ヒロインと話すと好感度が上がり、仲が深まると特別なイベントが起きる。" }
+    ]
+  },
+  {
+    "id": "ending_friend", "heroine": null, "type": "ending", "location": "shrine",
+    "lines": [
+      { "speaker": "narration", "text": "夏祭りの夜。人混みの中、一人で花火を見上げた。" },
+      { "speaker": "narration", "text": "楽しい春だった。たくさんの人と出会い、たくさん笑った。" },
+      { "speaker": "narration", "text": "でも、誰か一人に、ちゃんと気持ちを伝えることはできなかった。" },
+      { "speaker": "narration", "text": "……来年の夏は、きっと。" },
+      { "speaker": "narration", "text": "── 友達エンド「また来年の花火」" }
+    ]
+  }
+]

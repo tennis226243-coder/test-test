@@ -1,0 +1,53 @@
+[
+  {
+    "id": "hina",
+    "name": "春野 ひな",
+    "age": 20,
+    "role": "同じ学科の同級生",
+    "personality": "明るく行動的。思い立ったらすぐ動くタイプで、甘いものに目がない。",
+    "appearance": "Japanese woman, age 20, shoulder-length wavy light brown hair with a small hair clip, bright brown eyes, warm friendly smile, wearing a cream knit cardigan over a white blouse and a light denim skirt, canvas tote bag on shoulder",
+    "color": "#ff8fa3",
+    "likes": ["sweets", "accessory"],
+    "dislikes": ["book"],
+    "repeatLine": "今日はもういっぱい話したね! また明日ね〜!",
+    "schedule": {
+      "weekday": { "morning": "campus", "noon": "campus", "evening": "shopping", "night": null },
+      "sat": { "morning": null, "noon": "shopping", "evening": "seaside", "night": null },
+      "sun": { "morning": null, "noon": "shopping", "evening": "shopping", "night": null }
+    }
+  },
+  {
+    "id": "rei",
+    "name": "水瀬 玲",
+    "age": 23,
+    "role": "バイト先カフェの先輩",
+    "personality": "大人っぽく面倒見がよい。仕事には厳しいが、夜の海を眺めるのが好きなロマンチスト。",
+    "appearance": "Japanese woman, age 23, long straight black hair tied in a low ponytail, calm dark eyes, gentle composed expression, wearing a white shirt with rolled sleeves and a dark brown cafe apron, small silver earrings",
+    "color": "#7aa6ff",
+    "likes": ["flowers", "accessory"],
+    "dislikes": ["sweets"],
+    "repeatLine": "今日はもう十分話したでしょ。続きはまた明日ね。",
+    "schedule": {
+      "weekday": { "morning": null, "noon": "cafe", "evening": "cafe", "night": "seaside" },
+      "sat": { "morning": null, "noon": "cafe", "evening": "cafe", "night": null },
+      "sun": { "morning": "seaside", "noon": "seaside", "evening": "cafe", "night": null }
+    }
+  },
+  {
+    "id": "shiori",
+    "name": "月島 栞",
+    "age": 24,
+    "role": "図書館の司書",
+    "personality": "物静かで読書家。人と話すのは少し苦手だが、本の話になると止まらない。",
+    "appearance": "Japanese woman, age 24, black bob haircut with straight bangs, thin round glasses, soft shy expression, wearing a navy long cardigan over a pale blue blouse and a long beige skirt, library staff lanyard",
+    "color": "#9be3b5",
+    "likes": ["book", "flowers"],
+    "dislikes": ["accessory"],
+    "repeatLine": "……今日は、もうたくさんお話ししましたね。また、明日。",
+    "schedule": {
+      "weekday": { "morning": "library", "noon": "library", "evening": "library", "night": null },
+      "sat": { "morning": "shrine", "noon": "library", "evening": null, "night": null },
+      "sun": { "morning": "shrine", "noon": "shrine", "evening": null, "night": null }
+    }
+  }
+]
