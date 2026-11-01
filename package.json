@@ -1,0 +1,12 @@
+{
+  "name": "open-world-dating-sim",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test game/tests/*.test.js",
+    "serve": "npx http-server game -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "phaser": "3.80.1"
+  }
+}
