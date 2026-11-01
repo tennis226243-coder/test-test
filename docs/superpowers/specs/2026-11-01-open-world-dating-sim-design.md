@@ -134,7 +134,7 @@ tools/
   "id": "hina_event_1",
   "heroine": "hina",
   "location": "campus",
-  "condition": { "affection": { "hina": 20 }, "timeOfDay": ["noon"] },
+  "condition": { "affection": { "hina": 20 }, "time": ["noon"] },
   "lines": [
     { "speaker": "hina", "expression": "smile", "text": "あ、同じ講義だったんだ!" },
     { "choice": [

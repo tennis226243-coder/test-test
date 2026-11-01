@@ -44,3 +44,28 @@ test('out-of-range slots are rejected', () => {
   assert.equal(ss.save(-1, createInitialState()), false);
   assert.equal(ss.load(3), null);
 });
+
+test('right version but missing or malformed fields is corrupt', () => {
+  const store = memory();
+  const ss = createSaveSystem(store);
+  const put = (state) => store.setItem('ows_save_0', JSON.stringify({ savedAt: 1, state }));
+  put({ version: 1, day: 3, time: 'noon' });
+  assert.deepEqual(ss.load(0), { error: 'corrupt' });
+  assert.deepEqual(ss.list()[0], { corrupt: true });
+  put({ ...createInitialState(), time: 'midnight' });
+  assert.deepEqual(ss.load(0), { error: 'corrupt' });
+  put({ ...createInitialState(), affection: { hina: 'a', rei: 0, shiori: 0 } });
+  assert.deepEqual(ss.load(0), { error: 'corrupt' });
+  put({ ...createInitialState(), day: 2.5 });
+  assert.deepEqual(ss.load(0), { error: 'corrupt' });
+});
+
+test('older save without newer optional fields still loads with defaults', () => {
+  const store = memory();
+  const ss = createSaveSystem(store);
+  const { inventory, giftedToday, ...old } = createInitialState();
+  store.setItem('ows_save_0', JSON.stringify({ savedAt: 1, state: old }));
+  const loaded = ss.load(0);
+  assert.deepEqual(loaded.inventory, {});
+  assert.deepEqual(loaded.giftedToday, {});
+});

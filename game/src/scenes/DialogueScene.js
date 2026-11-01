@@ -36,6 +36,7 @@ export class DialogueScene extends Phaser.Scene {
     this.tweens.add({ targets: this.hint, alpha: 0.2, yoyo: true, repeat: -1, duration: 500 });
 
     this.input.keyboard.on('keydown', (e) => {
+      if (e.repeat) return;
       if (['Space', 'Enter', 'NumpadEnter'].includes(e.code)) this.proceed();
     });
     this.input.on('pointerdown', () => this.proceed());

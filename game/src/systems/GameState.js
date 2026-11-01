@@ -1,4 +1,5 @@
 export const HEROINE_IDS = ['hina', 'rei', 'shiori'];
+export const STAT_IDS = ['int', 'charm', 'stamina'];
 
 export function createInitialState() {
   return {
@@ -12,6 +13,7 @@ export function createInitialState() {
     flags: {},
     talkedToday: {},
     inventory: {},
+    giftedToday: {},
     ended: null,
   };
 }

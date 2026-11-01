@@ -1,4 +1,20 @@
+import { TIME_SLOTS, LAST_DAY } from './TimeSystem.js';
 import { getDate } from './TimeSystem.js';
+import { HEROINE_IDS, STAT_IDS } from './GameState.js';
+
+const isObj = (v) => v != null && typeof v === 'object' && !Array.isArray(v);
+const numbersFor = (obj, keys) => isObj(obj) && keys.every((k) => Number.isFinite(obj[k]));
+
+/** Shape check so a damaged save shows as 破損 instead of crashing the game later. */
+export function isValidState(s) {
+  return isObj(s) && s.version === SAVE_VERSION &&
+    Number.isInteger(s.day) && s.day >= 0 && s.day <= LAST_DAY &&
+    TIME_SLOTS.includes(s.time) && Number.isFinite(s.money) &&
+    numbersFor(s.affection, HEROINE_IDS) && numbersFor(s.eventStage, HEROINE_IDS) &&
+    numbersFor(s.stats, STAT_IDS) && isObj(s.flags) && isObj(s.talkedToday) &&
+    (s.inventory === undefined || isObj(s.inventory)) &&
+    (s.giftedToday === undefined || isObj(s.giftedToday));
+}
 
 export const SLOT_COUNT = 3;
 export const SAVE_VERSION = 1;
@@ -12,9 +28,9 @@ export function createSaveSystem(storage) {
     if (raw == null) return null;
     try {
       const parsed = JSON.parse(raw);
-      if (parsed?.state?.version !== SAVE_VERSION || typeof parsed.state.day !== 'number') return { error: 'corrupt' };
-      getDate(parsed.state); // throws on an impossible day
-      return parsed;
+      if (!isValidState(parsed?.state)) return { error: 'corrupt' };
+      // Fields added after the first save format get defaults.
+      return { ...parsed, state: { inventory: {}, giftedToday: {}, ...parsed.state } };
     } catch {
       return { error: 'corrupt' };
     }

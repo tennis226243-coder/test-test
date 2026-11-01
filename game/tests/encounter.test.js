@@ -56,6 +56,16 @@ test('giveGift consumes an item and applies preference', () => {
   assert.equal(giveGift(s, hina, 'book').affection.hina, 0);
 });
 
+test('only one gift per heroine per day', () => {
+  const s = { ...s0(), inventory: { sweets: 3 } };
+  const a = giveGift(s, hina, 'sweets');
+  assert.equal(a.giftedToday.hina, true);
+  assert.equal(giveGift(a, hina, 'sweets'), a);
+  const tomorrow = runAction(a, { id: 'rest', sleep: true }).state;
+  assert.deepEqual(tomorrow.giftedToday, {});
+  assert.equal(giveGift(tomorrow, hina, 'sweets').affection.hina, 16);
+});
+
 test('runAction: effects, purchases, rest, festival rest', () => {
   const work = runAction(s0(), { id: 'work', effects: { money: 2000, stats: { stamina: -2 } } });
   assert.equal(work.state.money, 5000);

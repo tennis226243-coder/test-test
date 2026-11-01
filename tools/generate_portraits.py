@@ -92,11 +92,13 @@ def plan_jobs(heroines, locations, only, force, exists_fn=lambda p: p.exists()):
     for h in heroines:
         for expr in EXPRESSIONS:  # "normal" first: the others use it as a reference image
             path = portrait_path(h["id"], expr)
-            if selected(f"{h['id']}:{expr}") and (force or not exists_fn(path)):
+            key = f"{h['id']}:{expr}"
+            if selected(key) and (force or key in wanted or not exists_fn(path)):
                 jobs.append(Job("portrait", h["id"], expr, path))
     for loc in locations:
         path = background_path(loc["id"])
-        if selected(f"bg:{loc['id']}") and (force or not exists_fn(path)):
+        key = f"bg:{loc['id']}"
+        if selected(key) and (force or key in wanted or not exists_fn(path)):
             jobs.append(Job("background", loc["id"], None, path))
     return jobs
 
@@ -140,6 +142,11 @@ def call_gemini(prompt, ref_image_bytes=None, *, api_key, aspect_ratio=None,
             break
         except urllib.error.HTTPError as e:
             if (e.code == 429 or e.code >= 500) and attempt < len(RETRY_WAITS):
+                sleep(RETRY_WAITS[attempt])
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError):
+            if attempt < len(RETRY_WAITS):
                 sleep(RETRY_WAITS[attempt])
                 continue
             raise
@@ -224,6 +231,9 @@ def run_jobs(jobs, api_key, run_one=run_one):
         except urllib.error.HTTPError as e:
             print(f"  -> APIエラー {e.code}: {e.read()[:300]!r}")
             refused.append((job, f"HTTP {e.code}"))
+        except Exception as e:  # network failure, broken image data, ...: keep going with the rest
+            print(f"  -> エラー: {e!r}")
+            refused.append((job, repr(e)))
     return refused
 
 
@@ -278,10 +288,13 @@ def main(argv=None):
     heroines, locations = load_data()
     jobs = plan_jobs(heroines, locations, args.only, args.force)
     print(f"モデル: {MODEL} / 生成する画像: {len(jobs)} 枚")
-    refused = run_jobs(jobs, api_key, run_one=lambda j, k: run_one(j, k, heroines, locations))
-    manifest = write_manifest(heroines, locations)
-    write_contact_sheet(manifest)
-    print(f"一覧ページ: {OUT / 'contact_sheet.html'}")
+    try:
+        refused = run_jobs(jobs, api_key, run_one=lambda j, k: run_one(j, k, heroines, locations))
+    finally:
+        # Always register whatever images made it to disk, even if the run was interrupted.
+        manifest = write_manifest(heroines, locations)
+        write_contact_sheet(manifest)
+        print(f"一覧ページ: {OUT / 'contact_sheet.html'}")
     if refused:
         print("生成できなかった画像:")
         for job, reason in refused:

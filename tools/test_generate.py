@@ -58,6 +58,10 @@ class PlanJobsTest(unittest.TestCase):
         jobs = gp.plan_jobs(HEROINES, LOCATIONS, ["hina:smile", "bg:cafe"], False, exists_fn=lambda p: False)
         self.assertEqual([(j.kind, j.id, j.expr) for j in jobs], [("portrait", "hina", "smile"), ("background", "cafe", None)])
 
+    def test_only_regenerates_existing_files(self):
+        jobs = gp.plan_jobs(HEROINES, LOCATIONS, ["hina:smile"], False, exists_fn=lambda p: True)
+        self.assertEqual([(j.id, j.expr) for j in jobs], [("hina", "smile")])
+
     def test_expressions_come_after_normal(self):
         jobs = gp.plan_jobs(HEROINES, LOCATIONS, None, False, exists_fn=lambda p: False)
         hina = [j.expr for j in jobs if j.id == "hina"]
@@ -108,6 +112,12 @@ class CallGeminiTest(unittest.TestCase):
         self.assertEqual(gp.call_gemini("p", api_key="k", opener=opener, sleep=waits.append), b"ok")
         self.assertEqual(waits, [2, 4])
 
+    def test_retries_network_errors(self):
+        waits = []
+        opener = mock.Mock(side_effect=[urllib.error.URLError("reset"), TimeoutError(), image_response(b"ok")])
+        self.assertEqual(gp.call_gemini("p", api_key="k", opener=opener, sleep=waits.append), b"ok")
+        self.assertEqual(waits, [2, 4])
+
     def test_gives_up_after_four_retries(self):
         opener = mock.Mock(side_effect=[http_error(429)] * 5)
         with self.assertRaises(urllib.error.HTTPError):
@@ -138,6 +148,28 @@ class MainTest(unittest.TestCase):
         refused = gp.run_jobs(jobs, "k", run_one=fake_run)
         self.assertEqual(calls, ["cafe", "home"])
         self.assertEqual([j.id for j, _ in refused], ["cafe"])
+
+    def test_unexpected_error_on_one_job_does_not_stop_others(self):
+        calls = []
+
+        def fake_run(job, api_key):
+            calls.append(job.id)
+            if job.id == "cafe":
+                raise urllib.error.URLError("dns")
+
+        jobs = [gp.Job("background", "cafe", None, Path("a")), gp.Job("background", "home", None, Path("b"))]
+        refused = gp.run_jobs(jobs, "k", run_one=fake_run)
+        self.assertEqual(calls, ["cafe", "home"])
+        self.assertEqual(len(refused), 1)
+
+    def test_manifest_written_even_if_run_crashes(self):
+        with mock.patch.dict(os.environ, {"GEMINI_API_KEY": "k"}), \
+                mock.patch.object(gp, "run_jobs", side_effect=KeyboardInterrupt), \
+                mock.patch.object(gp, "write_manifest", return_value={"portraits": {}, "backgrounds": []}) as wm, \
+                mock.patch.object(gp, "write_contact_sheet"), mock.patch("sys.stdout", new_callable=io.StringIO):
+            with self.assertRaises(KeyboardInterrupt):
+                gp.main([])
+        wm.assert_called_once()
 
 
 if __name__ == "__main__":

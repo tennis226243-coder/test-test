@@ -27,7 +27,7 @@ export function isFestival(state) {
 }
 
 function nextMorning(state) {
-  return { ...state, day: Math.min(state.day + 1, LAST_DAY), time: 'morning', talkedToday: {} };
+  return { ...state, day: Math.min(state.day + 1, LAST_DAY), time: 'morning', talkedToday: {}, giftedToday: {} };
 }
 
 export function advanceTime(state) {

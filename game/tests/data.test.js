@@ -54,6 +54,60 @@ test('every door is reachable from spawn', () => {
   for (const l of data.locations) assert.ok(seen.has(`${l.door.x},${l.door.y}`), `${l.id} reachable`);
 });
 
+const DAY_TYPES = ['weekday', 'sat', 'sun'];
+const STATS = ['int', 'charm', 'stamina'];
+const subset = (obj, allowed) => Object.keys(obj ?? {}).filter((k) => !allowed.includes(k));
+
+/** Returns a list of problems in a condition / effects object (empty = ok). */
+function conditionProblems(c) {
+  if (!c) return [];
+  const p = subset(c, ['affection', 'stats', 'time', 'dayType', 'flag', 'notFlag', 'money']).map((k) => `unknown condition key ${k}`);
+  p.push(...subset(c.affection, HEROINE_IDS).map((k) => `unknown heroine ${k}`));
+  p.push(...subset(c.stats, STATS).map((k) => `unknown stat ${k}`));
+  p.push(...(c.time ?? []).filter((t) => !TIME_SLOTS.includes(t)).map((t) => `unknown time ${t}`));
+  p.push(...(c.dayType ?? []).filter((t) => !DAY_TYPES.includes(t)).map((t) => `unknown dayType ${t}`));
+  return p;
+}
+function effectProblems(e) {
+  if (!e) return [];
+  const p = subset(e, ['affection', 'stats', 'money', 'setFlag']).map((k) => `unknown effect key ${k}`);
+  p.push(...subset(e.affection, HEROINE_IDS).map((k) => `unknown heroine ${k}`));
+  p.push(...subset(e.stats, STATS).map((k) => `unknown stat ${k}`));
+  for (const v of [...Object.values(e.affection ?? {}), ...Object.values(e.stats ?? {})]) if (!Number.isFinite(v)) p.push(`non-numeric ${v}`);
+  return p;
+}
+
+test('condition/effect validators catch typos', () => {
+  assert.deepEqual(conditionProblems({ timeOfDay: ['noon'] }), ['unknown condition key timeOfDay']);
+  assert.deepEqual(conditionProblems({ affection: { hnia: 5 } }), ['unknown heroine hnia']);
+  assert.deepEqual(conditionProblems({ time: ['midnight'] }), ['unknown time midnight']);
+  assert.deepEqual(effectProblems({ stats: { intel: 1 } }), ['unknown stat intel']);
+  assert.deepEqual(effectProblems({ affectoin: {} }), ['unknown effect key affectoin']);
+  assert.deepEqual(conditionProblems({ time: ['noon'], affection: { hina: 20 } }), []);
+});
+
+test('all conditions and effects in data are valid', () => {
+  const problems = [];
+  const lineSets = (d) => [d.lines, ...Object.values(d.branches ?? {})];
+  for (const d of data.dialogues) {
+    problems.push(...conditionProblems(d.condition).map((x) => `${d.id}: ${x}`));
+    problems.push(...effectProblems(d.onComplete && { ...d.onComplete }).map((x) => `${d.id}: ${x}`));
+    for (const lines of lineSets(d)) for (const ln of lines) for (const c of ln.choice ?? []) {
+      problems.push(...conditionProblems(c.condition).map((x) => `${d.id}: ${x}`));
+      problems.push(...effectProblems(c.effects).map((x) => `${d.id}: ${x}`));
+    }
+  }
+  for (const l of data.locations) for (const a of l.actions) {
+    problems.push(...conditionProblems(a.condition).map((x) => `${l.id}/${a.id}: ${x}`));
+    problems.push(...effectProblems(a.effects).map((x) => `${l.id}/${a.id}: ${x}`));
+  }
+  assert.deepEqual(problems, []);
+});
+
+test('every heroine has an ending dialogue with the id the ending scene looks up', () => {
+  for (const id of HEROINE_IDS) assert.ok(data.dialogues.find((d) => d.id === `${id}_ending` && d.type === 'ending'), id);
+});
+
 test('dialogues reference known ids, expressions and branches', () => {
   const speakers = new Set([...HEROINE_IDS, 'me', 'narration']);
   const checkLines = (d, lines, where) => {

@@ -30,10 +30,11 @@ export function beginEncounter(state, heroineId, encounter) {
 
 export function giveGift(state, heroine, itemId) {
   const count = state.inventory[itemId] ?? 0;
-  if (count <= 0) return state;
+  if (count <= 0 || state.giftedToday?.[heroine.id]) return state;
   const inventory = { ...state.inventory };
   if (count === 1) delete inventory[itemId]; else inventory[itemId] = count - 1;
-  return addAffection({ ...state, inventory }, heroine.id, giftDelta(heroine, itemId));
+  const giftedToday = { ...state.giftedToday, [heroine.id]: true };
+  return addAffection({ ...state, inventory, giftedToday }, heroine.id, giftDelta(heroine, itemId));
 }
 
 /** Runs a location action. Returns { ok, state, advanced }. */

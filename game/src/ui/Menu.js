@@ -53,6 +53,7 @@ export class Menu {
 
   _key(e) {
     if (!this.ready || this.destroyed) return;
+    if (e.repeat && !['ArrowUp', 'KeyW', 'ArrowDown', 'KeyS'].includes(e.code)) return; // only cursor keys may auto-repeat
     if (['ArrowUp', 'KeyW'].includes(e.code)) this._move(-1);
     else if (['ArrowDown', 'KeyS'].includes(e.code)) this._move(1);
     else if (['Enter', 'Space', 'NumpadEnter'].includes(e.code)) { if (!this.items[this.index]?.disabled) this._pick(this.index); }

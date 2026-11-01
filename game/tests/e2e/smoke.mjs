@@ -42,6 +42,28 @@ try {
   step('player moves');
   await page.screenshot({ path: `${OUT}world.png` });
 
+  // Standing on a door opens the place's menu even if a heroine is next to it (hina is beside the campus door).
+  await page.evaluate(() => window.__game.debug.teleportTo('campus'));
+  await page.waitForTimeout(250);
+  await page.keyboard.press('Space');
+  await page.waitForTimeout(300);
+  if (await sceneActive('Dialogue')) fail('door interaction started a dialogue instead of the location menu');
+  if (!(await page.evaluate(() => window.__game.scene.getScene('World').busy))) fail('location menu did not open');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
+  step('door takes priority over nearby heroine');
+
+  // Auto-repeated key events (holding a key) must not trigger actions.
+  await page.evaluate(() => window.__game.debug.teleportTo('hina'));
+  await page.waitForTimeout(250);
+  await page.evaluate(() => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', key: ' ', keyCode: 32, repeat: true }));
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', key: ' ', keyCode: 32 }));
+  });
+  await page.waitForTimeout(300);
+  if (await sceneActive('Dialogue')) fail('auto-repeat keydown started a dialogue');
+  step('auto-repeat ignored');
+
   if (process.env.E2E_STAGE !== 'world') {
     // Task 7: talk to a heroine, pick a choice
     await page.evaluate(() => window.__game.debug.teleportTo('hina'));

@@ -34,6 +34,7 @@ export class WorldScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys('W,A,S,D');
     this.input.keyboard.on('keydown', (e) => {
+      if (e.repeat) return; // holding a key must not repeat actions
       if (['Space', 'Enter', 'NumpadEnter'].includes(e.code)) this.interact();
     });
 
@@ -144,14 +145,18 @@ export class WorldScene extends Phaser.Scene {
 
   interact() {
     if (this.busy || this.ending || this.time.now < (this.cooldownUntil ?? 0)) return;
+    const doorXY = (l) => [(l.door.x + 0.5) * TILE, (l.door.y + 0.5) * TILE];
+    // Standing right on a door always means "use this place", even with a heroine next to it.
+    const onDoor = this.nearest(store.data.locations, doorXY, TILE * 0.6);
+    if (onDoor) return this.locationMenu(onDoor);
     const npc = this.nearest(this.npcs.getChildren().filter((c) => c.heroine), (c) => [c.x, c.y], TILE * 1.6);
     if (npc) return this.heroineMenu(npc.heroine, npc.locationId);
-    const loc = this.nearest(store.data.locations, (l) => [(l.door.x + 0.5) * TILE, (l.door.y + 0.5) * TILE], TILE * 1.6);
+    const loc = this.nearest(store.data.locations, doorXY, TILE * 1.6);
     if (loc) this.locationMenu(loc);
   }
 
   heroineMenu(heroine, locationId) {
-    const items = Object.entries(store.state.inventory ?? {}).filter(([, n]) => n > 0);
+    const items = store.state.giftedToday?.[heroine.id] ? [] : Object.entries(store.state.inventory ?? {}).filter(([, n]) => n > 0);
     if (!items.length) return this.talk(heroine, locationId);
     this.busy = true;
     const options = [{ label: '話す' }, ...items.map(([id, n]) => ({ label: `${ITEMS[id]}をプレゼントする (×${n})` })), { label: 'やめる' }];
