@@ -1,4 +1,5 @@
 import { HEROINE_IDS } from './GameState.js';
+import { checkCondition } from './Conditions.js';
 
 export const EVENT_THRESHOLDS = [20, 40, 60, 75, 90];
 export const FINAL_STAGE = 5;
@@ -24,17 +25,13 @@ export function giftDelta(heroine, itemId) {
   return 3;
 }
 
-let conditionCheck = () => true;
-/** DialogueRunner wires in its condition checker to avoid a circular import. */
-export function setConditionChecker(fn) { conditionCheck = fn; }
-
 export function findAvailableEvent(state, heroineId, locationId, dialogues) {
   const stage = state.eventStage[heroineId];
   if (stage >= FINAL_STAGE) return null;
   if (state.affection[heroineId] < EVENT_THRESHOLDS[stage]) return null;
   return dialogues.find((d) =>
     d.type === 'event' && d.heroine === heroineId && d.event === stage + 1 &&
-    (!d.location || d.location === locationId) && conditionCheck(d.condition, state)
+    (!d.location || d.location === locationId) && checkCondition(d.condition, state)
   ) ?? null;
 }
 
