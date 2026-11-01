@@ -15,7 +15,7 @@ async function boot() {
   } catch { /* no generated images yet: placeholders are used */ }
 
   const game = new Phaser.Game({
-    type: Phaser.AUTO,
+    type: new URLSearchParams(location.search).get('renderer') === 'canvas' ? Phaser.CANVAS : Phaser.AUTO,
     parent: 'game',
     width: 1280,
     height: 720,

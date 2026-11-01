@@ -20,7 +20,7 @@ const waitScene = (key) => page.waitForFunction((k) => window.__game?.scene.isAc
 const state = () => page.evaluate(() => window.__game.debug.state());
 
 try {
-  await page.goto('http://localhost:8765/');
+  await page.goto('http://localhost:8765/?renderer=canvas');
   await waitScene('Title');
   step('title shown');
   await page.waitForTimeout(300);
@@ -46,12 +46,12 @@ try {
     // Task 7: talk to a heroine, pick a choice
     await page.evaluate(() => window.__game.debug.teleportTo('hina'));
     await page.waitForTimeout(200);
+    const aff0 = (await state()).affection.hina;
     await page.keyboard.press('Space');
     await waitScene('Dialogue');
     step('dialogue with hina started');
     await page.waitForTimeout(400);
     await page.screenshot({ path: `${OUT}dialogue.png` });
-    const aff0 = (await state()).affection.hina;
     for (let i = 0; i < 30 && (await sceneActive('Dialogue')); i++) {
       const hasChoice = await page.evaluate(() => window.__game.debug.hasChoice());
       await page.keyboard.press(hasChoice ? 'Enter' : 'Space');

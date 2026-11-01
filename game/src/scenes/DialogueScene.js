@@ -5,6 +5,7 @@ import { DialogueRunner } from '../systems/DialogueRunner.js';
 import { ensurePortrait, ensureBackground } from '../art/placeholders.js';
 
 const CHAR_MS = 28;
+const PORTRAIT_HEIGHT = 680;
 
 /** Visual-novel style conversation overlay. data: { dialogue, heroineId, locationId, onDone } */
 export class DialogueScene extends Phaser.Scene {
@@ -12,7 +13,12 @@ export class DialogueScene extends Phaser.Scene {
 
   create({ dialogue, heroineId, locationId, onDone }) {
     const { width: W, height: H } = this.scale;
+    // Phaser reuses the scene instance on every launch: reset per-run state.
     this.onDone = onDone;
+    this.finished = false;
+    this.menu = null;
+    this.fullText = '';
+    this.shown = 0;
     this.runner = new DialogueRunner(dialogue, store.state);
     this.heroineId = heroineId ?? dialogue.heroine;
 
@@ -63,9 +69,7 @@ export class DialogueScene extends Phaser.Scene {
     if (!id) return; // narration / player keep the current portrait
     const key = ensurePortrait(this, store.heroine(id), line.expression ?? 'normal');
     this.portrait.setTexture(key).setVisible(true);
-    const scale = Math.min(680 / this.portrait.height, 1);
-    this.portrait.setScale(this.textures.get(key).key.startsWith('ph_') ? 1 : 680 / this.portrait.height);
-    if (scale > 1) this.portrait.setScale(1);
+    this.portrait.setScale(PORTRAIT_HEIGHT / this.portrait.frame.height);
   }
 
   proceed() {

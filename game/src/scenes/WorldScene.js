@@ -21,6 +21,8 @@ export class WorldScene extends Phaser.Scene {
     this.mapW = this.tiles[0].length * TILE;
     this.mapH = this.tiles.length * TILE;
     this.busy = false;
+    this.ending = false;
+    this.cooldownUntil = 0;
 
     this.drawMap();
     const spawn = isNew ? map.spawn : (store.location('home').door);
