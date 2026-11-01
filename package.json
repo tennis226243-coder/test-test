@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node --test game/tests/*.test.js",
     "serve": "node tools/serve.mjs 8080",
-    "e2e": "node game/tests/e2e/smoke.mjs"
+    "e2e": "node game/tests/e2e/smoke.mjs",
+    "test:py": "python3 -m unittest tools/test_generate.py"
   },
   "devDependencies": {
     "phaser": "3.80.1"
